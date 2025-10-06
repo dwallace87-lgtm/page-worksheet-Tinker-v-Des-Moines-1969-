@@ -238,79 +238,71 @@
       
     // ===== Apps Script submission (POST to your Sheet web app) =====
     // Replace the URL below with your deployed Apps Script Web App URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUsUnkv9_ZpuxUmeEUCAhHSSuVuMJhmI821Hrea_3MgCcnQh5ZF1x4XHPuywZG4dJCSA/exec';
-  const PAGE_VERSION = 'v4'; // bump to bust cache
+     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUsUnkv9_ZpuxUmeEUCAhHSSuVuMJhmI821Hrea_3MgCcnQh5ZF1x4XHPuywZG4dJCSA/exec';
+  const PAGE_VERSION = 'v5'; // cache-buster
 
+  // Helpers
   const getVal = (name) =>
     (document.querySelector(`input[name="${name}"]:checked`)?.value || '');
-
   const getTxt = (field) => {
     const el = document.querySelector(`[data-field="${field}"]`);
-    // flatten line breaks and extra spaces from contenteditable
     return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
   };
 
-  document.getElementById('rosterForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const msg = document.getElementById('formMsg');
-    msg.textContent = 'Submitting…';
+  // Wait for DOM so #rosterForm definitely exists
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('rosterForm');
+    const msg  = document.getElementById('formMsg');
 
-    const payload = {
-      period: document.getElementById('period').value,
-      firstName: document.getElementById('firstName').value.trim(),
-      lastName: document.getElementById('lastName').value.trim(),
-      q1Choice: getVal('q1'),
-      askParaphrase: getTxt('ask-paraphrase'),
-      gist: getTxt('gist'),
-      prior: getTxt('prior'),
-      eval1Choice: getVal('eval1'), eval1Why: getTxt('eval1'),
-      eval2Choice: getVal('eval2'), eval2Why: getTxt('eval2'),
-      eval3Choice: getVal('eval3'), eval3Why: getTxt('eval3'),
-      eval4Choice: getVal('eval4'), eval4Why: getTxt('eval4')
-    };
-
-    // Send as application/x-www-form-urlencoded (simple for no-cors)
-    const params = new URLSearchParams(payload);
-
-    try {
-      await fetch(SCRIPT_URL + '?' + PAGE_VERSION, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-        body: params.toString()
-      });
-
-      // debug: see exactly what we sent
-      window.lastPayload = payload;
-      console.log('Submitted payload:', payload);
-
-      msg.textContent = 'Submitted. Thank you!';
-    } catch (err) {
-      console.error(err);
-      msg.textContent = 'Error submitting. Try again.';
+    if (!form) {
+      console.error('Roster form not found.');
+      if (msg) msg.textContent = 'Error: form not found.';
+      return;
     }
-  });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (msg) msg.textContent = 'Submitting…';
+
+      const payload = {
+        period: document.getElementById('period')?.value || '',
+        firstName: document.getElementById('firstName')?.value.trim() || '',
+        lastName: document.getElementById('lastName')?.value.trim() || '',
+        q1Choice: getVal('q1'),
+        askParaphrase: getTxt('ask-paraphrase'),
+        gist: getTxt('gist'),
+        prior: getTxt('prior'),
+        eval1Choice: getVal('eval1'), eval1Why: getTxt('eval1'),
+        eval2Choice: getVal('eval2'), eval2Why: getTxt('eval2'),
+        eval3Choice: getVal('eval3'), eval3Why: getTxt('eval3'),
+        eval4Choice: getVal('eval4'), eval4Why: getTxt('eval4')
+      };
+
+      // For debugging: see exactly what we’re sending
+      window.lastPayload = payload;
+      console.log('Submitting payload:', payload);
+
+      // Send as form-encoded (best for no-cors)
+      const params = new URLSearchParams(payload);
 
       try {
-        const res = await fetch(SCRIPT_URL + `?${PAGE_VERSION}`, {
+        await fetch(SCRIPT_URL + '?' + PAGE_VERSION, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: params.toString()
         });
-        // expose payload for quick debug in browser console
-        window.lastPayload = payload;
-        console.log('Submitted payload:', payload);
-        msg.textContent = 'Submitted. Thank you!';
-        // Optional: do not wipe writing areas; just clear the top roster inputs
+        if (msg) msg.textContent = '✅ Submitted!';
+        // optional: clear the top three fields only
         document.getElementById('period').value = '';
         document.getElementById('firstName').value = '';
         document.getElementById('lastName').value = '';
       } catch (err) {
-        console.error(err);
-        msg.textContent = 'Error submitting. Try again.';
+        console.error('Submit error:', err);
+        if (msg) msg.textContent = 'Error submitting. Check console.';
       }
     });
+  });
         msg.textContent = 'Submitted. Thank you!';
         e.target.reset();
       } catch (err) {
