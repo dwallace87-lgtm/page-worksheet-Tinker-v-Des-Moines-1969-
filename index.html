@@ -239,30 +239,57 @@
     // ===== Apps Script submission (POST to your Sheet web app) =====
     // Replace the URL below with your deployed Apps Script Web App URL
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUsUnkv9_ZpuxUmeEUCAhHSSuVuMJhmI821Hrea_3MgCcnQh5ZF1x4XHPuywZG4dJCSA/exec';
-    // cache-buster for GitHub Pages
-    const PAGE_VERSION = 'v3';
+  const PAGE_VERSION = 'v4'; // bump to bust cache
 
-    document.getElementById('rosterForm')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const msg = document.getElementById('formMsg');
-      msg.textContent = 'Submitting…';
+  const getVal = (name) =>
+    (document.querySelector(`input[name="${name}"]:checked`)?.value || '');
 
-      const getVal = (name) => (document.querySelector(`input[name="${name}"]:checked`)?.value || '');
-      const getTxt = (field) => (document.querySelector(`[data-field="${field}"]`)?.textContent.trim() || '');
+  const getTxt = (field) => {
+    const el = document.querySelector(`[data-field="${field}"]`);
+    // flatten line breaks and extra spaces from contenteditable
+    return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
+  };
 
-      const payload = {
-        period: document.getElementById('period').value,
-        firstName: document.getElementById('firstName').value.trim(),
-        lastName: document.getElementById('lastName').value.trim(),
-        q1Choice: getVal('q1'),
-        askParaphrase: getTxt('ask-paraphrase'),
-        gist: getTxt('gist'),
-        prior: getTxt('prior'),
-        eval1Choice: getVal('eval1'), eval1Why: getTxt('eval1'),
-        eval2Choice: getVal('eval2'), eval2Why: getTxt('eval2'),
-        eval3Choice: getVal('eval3'), eval3Why: getTxt('eval3'),
-        eval4Choice: getVal('eval4'), eval4Why: getTxt('eval4')
-      };
+  document.getElementById('rosterForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('formMsg');
+    msg.textContent = 'Submitting…';
+
+    const payload = {
+      period: document.getElementById('period').value,
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      q1Choice: getVal('q1'),
+      askParaphrase: getTxt('ask-paraphrase'),
+      gist: getTxt('gist'),
+      prior: getTxt('prior'),
+      eval1Choice: getVal('eval1'), eval1Why: getTxt('eval1'),
+      eval2Choice: getVal('eval2'), eval2Why: getTxt('eval2'),
+      eval3Choice: getVal('eval3'), eval3Why: getTxt('eval3'),
+      eval4Choice: getVal('eval4'), eval4Why: getTxt('eval4')
+    };
+
+    // Send as application/x-www-form-urlencoded (simple for no-cors)
+    const params = new URLSearchParams(payload);
+
+    try {
+      await fetch(SCRIPT_URL + '?' + PAGE_VERSION, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: params.toString()
+      });
+
+      // debug: see exactly what we sent
+      window.lastPayload = payload;
+      console.log('Submitted payload:', payload);
+
+      msg.textContent = 'Submitted. Thank you!';
+    } catch (err) {
+      console.error(err);
+      msg.textContent = 'Error submitting. Try again.';
+    }
+  });
 
       try {
         const res = await fetch(SCRIPT_URL + `?${PAGE_VERSION}`, {
