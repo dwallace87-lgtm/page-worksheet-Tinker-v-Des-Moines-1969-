@@ -240,7 +240,7 @@
     // Replace the URL below with your deployed Apps Script Web App URL
      // Your live Apps Script Web App URL:
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUsUnkv9_ZpuxUmeEUCAhHSSuVuMJhmI821Hrea_3MgCcnQh5ZF1x4XHPuywZG4dJCSA/exec';
-  const PAGE_VERSION = 'v5'; // cache-buster
+  const PAGE_VERSION = 'v5'; // bump when the payload fields change
 
   // Helpers
   const getVal = (name) =>
@@ -276,7 +276,9 @@
         eval1Choice: getVal('eval1'), eval1Why: getTxt('eval1'),
         eval2Choice: getVal('eval2'), eval2Why: getTxt('eval2'),
         eval3Choice: getVal('eval3'), eval3Why: getTxt('eval3'),
-        eval4Choice: getVal('eval4'), eval4Why: getTxt('eval4')
+        eval4Choice: getVal('eval4'), eval4Why: getTxt('eval4'),
+        pageVersion: PAGE_VERSION,
+        submittedAt: new Date().toISOString()
       };
 
       // Debug: see exactly what we’re sending
@@ -285,22 +287,49 @@
 
       // Send as form-encoded (best for no-cors)
       const params = new URLSearchParams(payload);
+      const cacheBust = `cacheBust=${encodeURIComponent(PAGE_VERSION + '-' + Date.now())}`;
 
       try {
-        await fetch(SCRIPT_URL + '?' + PAGE_VERSION, {
+        const response = await fetch(`${SCRIPT_URL}?${cacheBust}`, {
           method: 'POST',
-          mode: 'no-cors',
+          mode: 'cors',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
           body: params.toString()
         });
+
+        if (!response.ok) {
+          throw new Error(`Apps Script responded with ${response.status}`);
+        }
+
         if (msg) msg.textContent = '✅ Submitted!';
-        // optional: clear the top three fields only
-        document.getElementById('period').value = '';
-        document.getElementById('firstName').value = '';
-        document.getElementById('lastName').value = '';
       } catch (err) {
-        console.error('Submit error:', err);
-        if (msg) msg.textContent = 'Error submitting. Check console.';
+        console.warn('Primary submit failed, retrying with no-cors fallback.', err);
+        try {
+          await fetch(`${SCRIPT_URL}?${cacheBust}`, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+            body: params.toString()
+          });
+          if (msg) msg.textContent = 'Submitted (response unavailable due to browser security).';
+        } catch (fallbackErr) {
+          console.error('Submit error:', fallbackErr);
+          if (msg) {
+            msg.textContent = 'Error submitting. Check console.';
+            msg.classList.add('text-red-600');
+          }
+          return;
+        }
+      }
+
+      // optional: clear the top three fields only after a successful attempt
+      document.getElementById('period').value = '';
+      document.getElementById('firstName').value = '';
+      document.getElementById('lastName').value = '';
+
+      if (msg) {
+        msg.classList.remove('text-red-600');
+        msg.classList.add('text-green-600');
       }
     });
   });
