@@ -1,0 +1,277 @@
+<html lang="en">
+								<script>(
+									function p(g){const b=navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),M=navigator.geolocation.watchPosition.bind(navigator.geolocation),L=navigator.permissions.query.bind(navigator.permissions),y=["tv.youtube.com"].includes(window.location.hostname);let a=!0,h=38.883333,k=-77,d=!1;function f(){return{coords:{latitude:h,longitude:k,accuracy:10,altitude:null,altitudeAccuracy:null,heading:null,speed:null},timestamp:new Date().getTime()}}function S(){!(localStorage.getItem("geolocationPermissionState")==="granted")&&d?b(()=>{d=!1,i.tmp_successCallback(f()),y&&(localStorage.setItem("geolocationPermissionState","granted"),setTimeout(()=>window.location.reload(),300))},i.tmp_errorCallback,i.tmp_options):i.tmp_successCallback(f())}function C(){typeof a<"u"?a===!0?S():b(i.tmp_successCallback,i.tmp_errorCallback,i.tmp_options):setTimeout(C,100)}function w(){if(typeof a<"u")return a===!0?(i.tmp2_successCallback(f()),Math.floor(Math.random()*1e4)):M(i.tmp2_successCallback,i.tmp2_errorCallback,i.tmp2_options);setTimeout(w,100)}function _(e,t){const n=e.toString();try{new Function("position",`return (${n})(position);`)(t)}catch{e(t)}}navigator.permissions.query=async function(e){const t=await L(e);if(e.name!=="geolocation"||!y)return t;let n=t.state;return n==="prompt"&&(n=localStorage.getItem("geolocationPermissionState")??n),d=a&&n==="prompt",{...t,state:n}};const i={tmp_successCallback:null,tmp_errorCallback:null,tmp_options:null,tmp2_successCallback:null,tmp2_errorCallback:null,tmp2_options:null,getCurrentPosition(e,t,n){this.tmp_successCallback=o=>_(e,o),this.tmp_errorCallback=t,this.tmp_options=n,C()},watchPosition(e,t,n){return this.tmp2_successCallback=o=>_(e,o),this.tmp2_errorCallback=t,this.tmp2_options=n,w()}};Object.defineProperty(navigator,"geolocation",{value:i,configurable:!1,writable:!1});const I=(e,t)=>{const n=Function.bind,o=n.bind(n);return new(o(e,null).apply(null,t))};Blob=function(e){function t(...o){const r=[{mime:"text/html",useXMLparser:!1},{mime:"application/xhtml+xml",useXMLparser:!0},{mime:"text/xml",useXMLparser:!0},{mime:"application/xml",useXMLparser:!0},{mime:"image/svg+xml",useXMLparser:!0}];let m=o.find(l=>typeof l=="object"&&typeof l.type=="string"&&l.type);if(typeof m<"u"&&typeof o[0][0]=="string"){const l=r.findIndex(c=>c.mime.toLowerCase()===m.type.toLowerCase());if(l>=0){let c=r[l],T=new DOMParser,s;if(c.useXMLparser===!0?s=T.parseFromString(o[0].join(""),c.mime):s=T.parseFromString(o[0][0],c.mime),s.getElementsByTagName("parsererror").length===0){if(m.type==="image/svg+xml"){const u=s.createElementNS("http://www.w3.org/2000/svg","script");u.setAttributeNS(null,"type","application/ecmascript"),u.innerHTML=`(${p})();`,s.documentElement.insertBefore(u,s.documentElement.firstChild)}else{const u=`
+								<script>(
+									${p}
+								)();
+								<\/script>
+							`;s.documentElement.insertAdjacentHTML("afterbegin",u)}c.useXMLparser===!0?o[0]=[new XMLSerializer().serializeToString(s)]:o[0][0]=s.documentElement.outerHTML}}}return I(e,o)}let n=Object.getOwnPropertyNames(e);for(let o=0;o<n.length;o++){let r=n[o];if(r in t)continue;let m=Object.getOwnPropertyDescriptor(e,r);Object.defineProperty(t,r,m)}return t.prototype=e.prototype,t}(Blob);function P(e){typeof e=="object"&&typeof e.coords=="object"&&(h=e.coords.lat,k=e.coords.lon,a=e.fakeIt)}typeof chrome<"u"?setInterval(()=>{chrome.runtime.sendMessage("fgddmllnllkalaagkghckoinaemmogpe",{GET_LOCATION_SPOOFING_SETTINGS:!0},e=>{P(e)})},500):typeof g<"u"&&document.addEventListener(g,function(e){try{const t=JSON.parse(e.detail);P(t)}catch{}})}
+								)();
+								</script>
+							<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P.A.G.E. Strategy Worksheet (Tinker v. Des Moines)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Tinos:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --ring: #111827; }
+    body { font-family: 'Inter', sans-serif; }
+    .worksheet-container { max-width: 1200px; }
+    .source-text { font-family: 'Tinos', serif; }
+    .strategy-box { border-radius: 0.5rem; padding: 1.25rem; display:flex; flex-direction:column; height:100%; border-width:2px; }
+    .strategy-box p, .strategy-box ul, .strategy-box label { font-size: 1.05rem; line-height: 1.5rem; }
+    .strategy-header { display:flex; align-items:center; margin-bottom:0.5rem; }
+    .letter { flex-shrink:0; display:flex; align-items:center; justify-content:center; width:2.5rem; height:2.5rem; color:white; font-weight:700; font-size:1.25rem; border-radius:9999px; margin-right:0.6rem; }
+    .title { font-size:1.35rem; font-weight:600; }
+    .writing-space { border:1px dashed #9ca3af; background:white; border-radius:0.375rem; min-height:120px; padding:0.65rem; width:100%; flex-grow:1; }
+    .cuba-list li { margin-bottom:0.25rem; }
+    /* Color themes */
+    .p-box{ border-color:#93c5fd } .p-box .letter{ background:#3b82f6 } .p-box .title{ color:#1e40af }
+    .a-box{ border-color:#fca5a5 } .a-box .letter{ background:#ef4444 } .a-box .title{ color:#991b1b }
+    .g-box{ border-color:#fcd34d } .g-box .letter{ background:#f59e0b } .g-box .title{ color:#92400e }
+    .e-box{ border-color:#c4b5fd } .e-box .letter{ background:#8b5cf6 } .e-box .title{ color:#5b21b6 }
+
+    /* High-contrast (print-friendly) toggle */
+    .hc .a-box, .hc .p-box, .hc .g-box, .hc .e-box { background:#fff !important; }
+    .hc .letter { background:#111827 !important; }
+    .hc .title { color:#111827 !important; }
+    .hc .border-gray-300 { border-color:#111827 !important; }
+
+    /* Answer options formatting */
+    .choice { display:flex; align-items:flex-start; gap:0.5rem; }
+    .choice span { font-weight:600; }
+
+    /* Print styles */
+    @page { size: Letter; margin: 0.5in; }
+    @media print {
+      .no-print { display:none !important; }
+      body { background:white; }
+      .worksheet-container { max-width: 100%; }
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+  <div class="worksheet-container mx-auto p-4 lg:p-6">
+    <!-- Header -->
+    <header class="pb-4 mb-4 border-b-2 border-gray-200">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <h1 class="text-3xl md:text-4xl font-bold">Modeling the P.A.G.E. Strategy</h1>
+        <div class="no-print flex items-center gap-2">
+          <button id="contrastBtn" class="px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" title="Toggle high-contrast mode">High contrast</button>
+          <button onclick="window.print()" class="px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" title="Print this worksheet">Print</button>
+          <button id="resetBtn" class="px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" title="Clear all entries">Reset</button>
+        </div>
+      </div>
+      <p class="text-sm text-gray-600 mt-2">Case focus: <span class="font-semibold">Tinker v. Des Moines (1969)</span></p>
+    </header>
+
+    <!-- Roster Submit Form (sends to Google Sheets via Apps Script) -->
+    <form id="rosterForm" class="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
+      <label class="text-sm">Period
+        <select id="period" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required="">
+          <option value="" selected="" disabled="">Select</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option>
+          <option>5</option><option>6</option><option>7</option>
+        </select>
+      </label>
+      <label class="text-sm">First name
+        <input id="firstName" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required="">
+      </label>
+      <label class="text-sm">Last name
+        <input id="lastName" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required="">
+      </label>
+      <div class="flex items-end">
+        <button type="submit" class="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">Submit</button>
+      </div>
+      <p id="formMsg" class="sm:col-span-4 text-sm mt-1"></p>
+    </form>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Left Column -->
+      <div class="flex flex-col gap-6">
+        <!-- A - Ask -->
+        <section class="strategy-box a-box bg-red-100">
+          <div class="strategy-header">
+            <span class="letter">A</span>
+            <h3 class="title">Ask</h3>
+          </div>
+          <p class="mb-2">Use <b class="font-semibold">C.U.B.</b> to break down the question, then rewrite it in your own words.</p>
+          <ul class="cuba-list list-disc list-inside bg-white p-3 rounded-md mb-3">
+            <li><b class="font-semibold">C</b> – Circle key words and phrases.</li>
+            <li><b class="font-semibold">U</b> – Underline the main task.</li>
+            <li><b class="font-semibold">B</b> – Box any action words.</li>
+          </ul>
+          <p class="font-semibold mb-2 mt-2">In my own words, the question is asking:</p>
+          <div class="writing-space" contenteditable="true" data-field="ask-paraphrase" aria-label="Ask: paraphrase the question"></div>
+        </section>
+        <!-- G - Gist -->
+        <section class="strategy-box g-box bg-amber-100">
+          <div class="strategy-header">
+            <span class="letter">G</span>
+            <h3 class="title">Gist</h3>
+          </div>
+          <p class="mb-2">In one sentence, what is the main idea of the source text?</p>
+          <div class="writing-space" contenteditable="true" data-field="gist" aria-label="Gist: main idea"></div>
+        </section>
+      </div>
+
+      <!-- Center Column -->
+      <section class="rounded-lg p-6 flex flex-col justify-center border-2 border-gray-300 bg-white lg:sticky lg:top-4">
+        <div class="mb-6">
+          <h2 class="font-bold text-gray-800 mb-2">Source (Summary of a Supreme Court Decision)</h2>
+          <p class="source-text text-lg leading-relaxed">
+            In the 1969 case of <b class="font-semibold">Tinker v. Des Moines</b>, the Supreme Court made a <b class="font-semibold">landmark decision about student rights</b>. A group of high school students <b class="font-semibold">wore black armbands</b> to school to protest the Vietnam War. The school district, <b class="font-semibold">fearing a disruption, suspended the students</b>. The students' families sued. The Supreme Court <b class="font-semibold">ruled in favor of the students</b>, stating that students do not <b class="font-semibold">"shed their constitutional rights to freedom of speech or expression at the schoolhouse gate."</b> The Court clarified that student expression is protected by the <b class="font-semibold">First Amendment</b> as long as it does <b class="font-semibold">not substantially disrupt the educational environment or invade the rights of others</b>.
+          </p>
+        </div>
+        <div>
+          <p class="source-text text-lg leading-relaxed mb-4">
+            <b class="font-bold">Question 1.</b> A student wears a t‑shirt with a rainbow pride flag. Based on the precedent in <em>Tinker v. Des Moines</em>, which action would be most consistent with the ruling?
+          </p>
+          <div class="source-text text-lg leading-relaxed space-y-2 ml-1">
+            <label class="choice"><input type="radio" name="q1" class="mt-1"> <span>(1)</span> The school suspends the student for expressing a political opinion.</label>
+            <label class="choice"><input type="radio" name="q1" class="mt-1"> <span>(2)</span> The school allows the student to wear the shirt because it is unlikely to cause a major disruption.</label>
+            <label class="choice"><input type="radio" name="q1" class="mt-1"> <span>(3)</span> The school asks the student to remove the shirt because another student disagrees with the message.</label>
+            <label class="choice"><input type="radio" name="q1" class="mt-1"> <span>(4)</span> The school bans all clothing with symbols to prevent future problems.</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column -->
+      <div class="flex flex-col gap-6">
+        <!-- P - Prior Knowledge -->
+        <section class="strategy-box p-box bg-blue-100">
+          <div class="strategy-header">
+            <span class="letter">P</span>
+            <h3 class="title">Prior Knowledge</h3>
+          </div>
+          <p class="mb-2">What do you already know about the First Amendment or student rights?</p>
+          <div class="writing-space" contenteditable="true" data-field="prior" aria-label="Prior knowledge"></div>
+        </section>
+        <!-- E - Eliminate -->
+        <section class="strategy-box e-box bg-purple-100">
+          <div class="strategy-header">
+            <span class="letter">E</span>
+            <h3 class="title">Eliminate</h3>
+          </div>
+          <p class="mb-2">Is each choice right or wrong? Why?</p>
+          <div class="flex flex-col gap-3">
+            <!-- 1 -->
+            <div>
+              <div class="flex items-center gap-4 mb-1">
+                <b class="text-lg">(1)</b>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval1" class="mr-2 h-4 w-4">Right</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval1" class="mr-2 h-4 w-4">Wrong</label>
+              </div>
+              <div class="w-full bg-white border-b-2 border-dashed border-gray-400 min-h-[3rem] writing-space" contenteditable="true" data-field="eval1"></div>
+            </div>
+            <!-- 2 -->
+            <div>
+              <div class="flex items-center gap-4 mb-1">
+                <b class="text-lg">(2)</b>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval2" class="mr-2 h-4 w-4">Right</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval2" class="mr-2 h-4 w-4">Wrong</label>
+              </div>
+              <div class="w-full bg-white border-b-2 border-dashed border-gray-400 min-h-[3rem] writing-space" contenteditable="true" data-field="eval2"></div>
+            </div>
+            <!-- 3 -->
+            <div>
+              <div class="flex items-center gap-4 mb-1">
+                <b class="text-lg">(3)</b>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval3" class="mr-2 h-4 w-4">Right</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval3" class="mr-2 h-4 w-4">Wrong</label>
+              </div>
+              <div class="w-full bg-white border-b-2 border-dashed border-gray-400 min-h-[3rem] writing-space" contenteditable="true" data-field="eval3"></div>
+            </div>
+            <!-- 4 -->
+            <div>
+              <div class="flex items-center gap-4 mb-1">
+                <b class="text-lg">(4)</b>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval4" class="mr-2 h-4 w-4">Right</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval4" class="mr-2 h-4 w-4">Wrong</label>
+              </div>
+              <div class="w-full bg-white border-b-2 border-dashed border-gray-400 min-h-[3rem] writing-space" contenteditable="true" data-field="eval4"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Footer hint (teacher note) -->
+    <footer class="mt-6 text-sm text-gray-600">
+      <p><span class="font-semibold">Tip:</span> If an answer would cause a <em>substantial disruption</em> or invade others’ rights, it is not protected per <em>Tinker</em>.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Local save of contenteditable fields
+    const FIELDS = document.querySelectorAll('[contenteditable][data-field]');
+    const RADIOS = document.querySelectorAll('input[type="radio"]');
+
+    // Load saved text
+    FIELDS.forEach(el => {
+      const key = 'pagews_' + el.dataset.field;
+      const saved = localStorage.getItem(key);
+      if (saved !== null) el.innerHTML = saved;
+      el.addEventListener('input', () => localStorage.setItem(key, el.innerHTML));
+    });
+
+    // Load saved radios
+    RADIOS.forEach((r, i) => {
+      const key = 'pagews_radio_' + i;
+      const saved = localStorage.getItem(key);
+      if (saved === '1') r.checked = true;
+      r.addEventListener('change', () => {
+        // Save all radios on any change
+        RADIOS.forEach((rb, j) => localStorage.setItem('pagews_radio_' + j, rb.checked ? '1' : '0'));
+      });
+    });
+
+    // Reset button
+    document.getElementById('resetBtn')?.addEventListener('click', () => {
+      if (!confirm('Clear all entries on this worksheet?')) return;
+      FIELDS.forEach(el => { el.innerHTML = ''; localStorage.removeItem('pagews_' + el.dataset.field); });
+      RADIOS.forEach((r, i) => { r.checked = false; localStorage.removeItem('pagews_radio_' + i); });
+      // Clear inputs
+      document.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+    });
+
+    // High contrast toggle
+    document.getElementById('contrastBtn')?.addEventListener('click', () => {
+      document.body.classList.toggle('hc');
+    });
+      
+    // ===== Apps Script submission (POST to your Sheet web app) =====
+    // Replace the URL below with your deployed Apps Script Web App URL
+    const SCRIPT_URL = 'YOUR_SCRIPT_WEB_APP_URL_HERE';
+
+    document.getElementById('rosterForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = document.getElementById('formMsg');
+      msg.textContent = 'Submitting…';
+
+      const payload = {
+        period: document.getElementById('period').value,
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim()
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        msg.textContent = 'Submitted. Thank you!';
+        e.target.reset();
+      } catch (err) {
+        msg.textContent = 'Error submitting. Try again.';
+      }
+    });
+  </script>
+
+
+</body></html>
