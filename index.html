@@ -238,7 +238,8 @@
       
     // ===== Apps Script submission (POST to your Sheet web app) =====
     // Replace the URL below with your deployed Apps Script Web App URL
-     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUsUnkv9_ZpuxUmeEUCAhHSSuVuMJhmI821Hrea_3MgCcnQh5ZF1x4XHPuywZG4dJCSA/exec';
+     // Your live Apps Script Web App URL:
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUsUnkv9_ZpuxUmeEUCAhHSSuVuMJhmI821Hrea_3MgCcnQh5ZF1x4XHPuywZG4dJCSA/exec';
   const PAGE_VERSION = 'v5'; // cache-buster
 
   // Helpers
@@ -278,7 +279,7 @@
         eval4Choice: getVal('eval4'), eval4Why: getTxt('eval4')
       };
 
-      // For debugging: see exactly what we’re sending
+      // Debug: see exactly what we’re sending
       window.lastPayload = payload;
       console.log('Submitting payload:', payload);
 
@@ -303,12 +304,6 @@
       }
     });
   });
-        msg.textContent = 'Submitted. Thank you!';
-        e.target.reset();
-      } catch (err) {
-        msg.textContent = 'Error submitting. Try again.';
-      }
-    });
   </script>
 </body>
 </html>
