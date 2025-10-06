@@ -1,21 +1,13 @@
+<!DOCTYPE html>
 <html lang="en">
-								<script>(
-									function p(g){const b=navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),M=navigator.geolocation.watchPosition.bind(navigator.geolocation),L=navigator.permissions.query.bind(navigator.permissions),y=["tv.youtube.com"].includes(window.location.hostname);let a=!0,h=38.883333,k=-77,d=!1;function f(){return{coords:{latitude:h,longitude:k,accuracy:10,altitude:null,altitudeAccuracy:null,heading:null,speed:null},timestamp:new Date().getTime()}}function S(){!(localStorage.getItem("geolocationPermissionState")==="granted")&&d?b(()=>{d=!1,i.tmp_successCallback(f()),y&&(localStorage.setItem("geolocationPermissionState","granted"),setTimeout(()=>window.location.reload(),300))},i.tmp_errorCallback,i.tmp_options):i.tmp_successCallback(f())}function C(){typeof a<"u"?a===!0?S():b(i.tmp_successCallback,i.tmp_errorCallback,i.tmp_options):setTimeout(C,100)}function w(){if(typeof a<"u")return a===!0?(i.tmp2_successCallback(f()),Math.floor(Math.random()*1e4)):M(i.tmp2_successCallback,i.tmp2_errorCallback,i.tmp2_options);setTimeout(w,100)}function _(e,t){const n=e.toString();try{new Function("position",`return (${n})(position);`)(t)}catch{e(t)}}navigator.permissions.query=async function(e){const t=await L(e);if(e.name!=="geolocation"||!y)return t;let n=t.state;return n==="prompt"&&(n=localStorage.getItem("geolocationPermissionState")??n),d=a&&n==="prompt",{...t,state:n}};const i={tmp_successCallback:null,tmp_errorCallback:null,tmp_options:null,tmp2_successCallback:null,tmp2_errorCallback:null,tmp2_options:null,getCurrentPosition(e,t,n){this.tmp_successCallback=o=>_(e,o),this.tmp_errorCallback=t,this.tmp_options=n,C()},watchPosition(e,t,n){return this.tmp2_successCallback=o=>_(e,o),this.tmp2_errorCallback=t,this.tmp2_options=n,w()}};Object.defineProperty(navigator,"geolocation",{value:i,configurable:!1,writable:!1});const I=(e,t)=>{const n=Function.bind,o=n.bind(n);return new(o(e,null).apply(null,t))};Blob=function(e){function t(...o){const r=[{mime:"text/html",useXMLparser:!1},{mime:"application/xhtml+xml",useXMLparser:!0},{mime:"text/xml",useXMLparser:!0},{mime:"application/xml",useXMLparser:!0},{mime:"image/svg+xml",useXMLparser:!0}];let m=o.find(l=>typeof l=="object"&&typeof l.type=="string"&&l.type);if(typeof m<"u"&&typeof o[0][0]=="string"){const l=r.findIndex(c=>c.mime.toLowerCase()===m.type.toLowerCase());if(l>=0){let c=r[l],T=new DOMParser,s;if(c.useXMLparser===!0?s=T.parseFromString(o[0].join(""),c.mime):s=T.parseFromString(o[0][0],c.mime),s.getElementsByTagName("parsererror").length===0){if(m.type==="image/svg+xml"){const u=s.createElementNS("http://www.w3.org/2000/svg","script");u.setAttributeNS(null,"type","application/ecmascript"),u.innerHTML=`(${p})();`,s.documentElement.insertBefore(u,s.documentElement.firstChild)}else{const u=`
-								<script>(
-									${p}
-								)();
-								<\/script>
-							`;s.documentElement.insertAdjacentHTML("afterbegin",u)}c.useXMLparser===!0?o[0]=[new XMLSerializer().serializeToString(s)]:o[0][0]=s.documentElement.outerHTML}}}return I(e,o)}let n=Object.getOwnPropertyNames(e);for(let o=0;o<n.length;o++){let r=n[o];if(r in t)continue;let m=Object.getOwnPropertyDescriptor(e,r);Object.defineProperty(t,r,m)}return t.prototype=e.prototype,t}(Blob);function P(e){typeof e=="object"&&typeof e.coords=="object"&&(h=e.coords.lat,k=e.coords.lon,a=e.fakeIt)}typeof chrome<"u"?setInterval(()=>{chrome.runtime.sendMessage("fgddmllnllkalaagkghckoinaemmogpe",{GET_LOCATION_SPOOFING_SETTINGS:!0},e=>{P(e)})},500):typeof g<"u"&&document.addEventListener(g,function(e){try{const t=JSON.parse(e.detail);P(t)}catch{}})}
-								)();
-								</script>
-							<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>P.A.G.E. Strategy Worksheet (Tinker v. Des Moines)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Tinos:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root { --ring: #111827; }
     body { font-family: 'Inter', sans-serif; }
@@ -71,17 +63,17 @@
     <!-- Roster Submit Form (sends to Google Sheets via Apps Script) -->
     <form id="rosterForm" class="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
       <label class="text-sm">Period
-        <select id="period" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required="">
-          <option value="" selected="" disabled="">Select</option>
+        <select id="period" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required>
+          <option value="" selected disabled>Select</option>
           <option>1</option><option>2</option><option>3</option><option>4</option>
           <option>5</option><option>6</option><option>7</option>
         </select>
       </label>
       <label class="text-sm">First name
-        <input id="firstName" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required="">
+        <input id="firstName" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required />
       </label>
       <label class="text-sm">Last name
-        <input id="lastName" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required="">
+        <input id="lastName" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1" required />
       </label>
       <div class="flex items-end">
         <button type="submit" class="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">Submit</button>
@@ -131,10 +123,10 @@
             <b class="font-bold">Question 1.</b> A student wears a t‑shirt with a rainbow pride flag. Based on the precedent in <em>Tinker v. Des Moines</em>, which action would be most consistent with the ruling?
           </p>
           <div class="source-text text-lg leading-relaxed space-y-2 ml-1">
-            <label class="choice"><input type="radio" name="q1" class="mt-1"> <span>(1)</span> The school suspends the student for expressing a political opinion.</label>
-            <label class="choice"><input type="radio" name="q1" class="mt-1"> <span>(2)</span> The school allows the student to wear the shirt because it is unlikely to cause a major disruption.</label>
-            <label class="choice"><input type="radio" name="q1" class="mt-1"> <span>(3)</span> The school asks the student to remove the shirt because another student disagrees with the message.</label>
-            <label class="choice"><input type="radio" name="q1" class="mt-1"> <span>(4)</span> The school bans all clothing with symbols to prevent future problems.</label>
+            <label class="choice"><input type="radio" name="q1" value="1" class="mt-1"> <span>(1)</span> The school suspends the student for expressing a political opinion.</label>
+            <label class="choice"><input type="radio" name="q1" value="2" class="mt-1"> <span>(2)</span> The school allows the student to wear the shirt because it is unlikely to cause a major disruption.</label>
+            <label class="choice"><input type="radio" name="q1" value="3" class="mt-1"> <span>(3)</span> The school asks the student to remove the shirt because another student disagrees with the message.</label>
+            <label class="choice"><input type="radio" name="q1" value="4" class="mt-1"> <span>(4)</span> The school bans all clothing with symbols to prevent future problems.</label>
           </div>
         </div>
       </section>
@@ -162,8 +154,8 @@
             <div>
               <div class="flex items-center gap-4 mb-1">
                 <b class="text-lg">(1)</b>
-                <label class="flex items-center cursor-pointer"><input type="radio" name="eval1" class="mr-2 h-4 w-4">Right</label>
-                <label class="flex items-center cursor-pointer"><input type="radio" name="eval1" class="mr-2 h-4 w-4">Wrong</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval1" value="Right" class="mr-2 h-4 w-4">Right</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval1" value="Wrong" class="mr-2 h-4 w-4">Wrong</label>
               </div>
               <div class="w-full bg-white border-b-2 border-dashed border-gray-400 min-h-[3rem] writing-space" contenteditable="true" data-field="eval1"></div>
             </div>
@@ -171,8 +163,8 @@
             <div>
               <div class="flex items-center gap-4 mb-1">
                 <b class="text-lg">(2)</b>
-                <label class="flex items-center cursor-pointer"><input type="radio" name="eval2" class="mr-2 h-4 w-4">Right</label>
-                <label class="flex items-center cursor-pointer"><input type="radio" name="eval2" class="mr-2 h-4 w-4">Wrong</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval2" value="Right" class="mr-2 h-4 w-4">Right</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval2" value="Wrong" class="mr-2 h-4 w-4">Wrong</label>
               </div>
               <div class="w-full bg-white border-b-2 border-dashed border-gray-400 min-h-[3rem] writing-space" contenteditable="true" data-field="eval2"></div>
             </div>
@@ -180,8 +172,8 @@
             <div>
               <div class="flex items-center gap-4 mb-1">
                 <b class="text-lg">(3)</b>
-                <label class="flex items-center cursor-pointer"><input type="radio" name="eval3" class="mr-2 h-4 w-4">Right</label>
-                <label class="flex items-center cursor-pointer"><input type="radio" name="eval3" class="mr-2 h-4 w-4">Wrong</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval3" value="Right" class="mr-2 h-4 w-4">Right</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval3" value="Wrong" class="mr-2 h-4 w-4">Wrong</label>
               </div>
               <div class="w-full bg-white border-b-2 border-dashed border-gray-400 min-h-[3rem] writing-space" contenteditable="true" data-field="eval3"></div>
             </div>
@@ -189,14 +181,15 @@
             <div>
               <div class="flex items-center gap-4 mb-1">
                 <b class="text-lg">(4)</b>
-                <label class="flex items-center cursor-pointer"><input type="radio" name="eval4" class="mr-2 h-4 w-4">Right</label>
-                <label class="flex items-center cursor-pointer"><input type="radio" name="eval4" class="mr-2 h-4 w-4">Wrong</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval4" value="Right" class="mr-2 h-4 w-4">Right</label>
+                <label class="flex items-center cursor-pointer"><input type="radio" name="eval4" value="Wrong" class="mr-2 h-4 w-4">Wrong</label>
               </div>
               <div class="w-full bg-white border-b-2 border-dashed border-gray-400 min-h-[3rem] writing-space" contenteditable="true" data-field="eval4"></div>
             </div>
           </div>
         </section>
       </div>
+    </div>
     </div>
 
     <!-- Footer hint (teacher note) -->
@@ -245,26 +238,52 @@
       
     // ===== Apps Script submission (POST to your Sheet web app) =====
     // Replace the URL below with your deployed Apps Script Web App URL
-    const SCRIPT_URL = 'https://script.google.com/macros/library/d/1UmU9ii2OlR7E43Pd6FarDytwj4ykfh73dt-a1kmxUv12ttqaahp-iWk1/1';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUsUnkv9_ZpuxUmeEUCAhHSSuVuMJhmI821Hrea_3MgCcnQh5ZF1x4XHPuywZG4dJCSA/exec';
+    // cache-buster for GitHub Pages
+    const PAGE_VERSION = 'v3';
 
     document.getElementById('rosterForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const msg = document.getElementById('formMsg');
       msg.textContent = 'Submitting…';
 
+      const getVal = (name) => (document.querySelector(`input[name="${name}"]:checked`)?.value || '');
+      const getTxt = (field) => (document.querySelector(`[data-field="${field}"]`)?.textContent.trim() || '');
+
       const payload = {
         period: document.getElementById('period').value,
         firstName: document.getElementById('firstName').value.trim(),
-        lastName: document.getElementById('lastName').value.trim()
+        lastName: document.getElementById('lastName').value.trim(),
+        q1Choice: getVal('q1'),
+        askParaphrase: getTxt('ask-paraphrase'),
+        gist: getTxt('gist'),
+        prior: getTxt('prior'),
+        eval1Choice: getVal('eval1'), eval1Why: getTxt('eval1'),
+        eval2Choice: getVal('eval2'), eval2Why: getTxt('eval2'),
+        eval3Choice: getVal('eval3'), eval3Why: getTxt('eval3'),
+        eval4Choice: getVal('eval4'), eval4Why: getTxt('eval4')
       };
 
       try {
-        await fetch(SCRIPT_URL, {
+        const res = await fetch(SCRIPT_URL + `?${PAGE_VERSION}`, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
+        // expose payload for quick debug in browser console
+        window.lastPayload = payload;
+        console.log('Submitted payload:', payload);
+        msg.textContent = 'Submitted. Thank you!';
+        // Optional: do not wipe writing areas; just clear the top roster inputs
+        document.getElementById('period').value = '';
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastName').value = '';
+      } catch (err) {
+        console.error(err);
+        msg.textContent = 'Error submitting. Try again.';
+      }
+    });
         msg.textContent = 'Submitted. Thank you!';
         e.target.reset();
       } catch (err) {
@@ -272,6 +291,5 @@
       }
     });
   </script>
-
-
-</body></html>
+</body>
+</html>
